@@ -36,7 +36,7 @@ Câu chuyện và phong cách của Green Garden Café
 
 Không gian xanh, yên tĩnh, phù hợp để thư giãn và làm việc
 
-- Menu
+- Menu / Gallery
 
 Các loại cà phê (Espresso, Cappuccino, Latte, Bạc Xỉu)
 
@@ -67,6 +67,15 @@ Tailwind CSS – Thiết kế giao diện
 JavaScript – Tương tác cơ bản
 
 OpenStreetMap Embed – Hiển thị vị trí quán
+
+## Demo Picture
+
+![home](image.png)
+![about](image-1.png)
+![menu](image-2.png)
+![gallery](image-3.png)
+![location](image-4.png)
+![contact](image-5.png)
 
 ## Running the code
 
