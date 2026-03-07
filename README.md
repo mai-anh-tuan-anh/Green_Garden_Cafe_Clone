@@ -2,71 +2,75 @@
 
 ## Introduction
 
-Green Garden Café Website là một website tĩnh được xây dựng nhằm giới thiệu một quán cà phê mang phong cách xanh – thiên nhiên – thư giãn. Website cung cấp thông tin về quán, thực đơn đồ uống và bánh, cũng như vị trí của quán trên bản đồ để khách hàng dễ dàng tìm đến.
+The Green Garden Café Website is a static website built to introduce a café with a green, nature-inspired, and relaxing atmosphere. The website provides information about the café, its drink and dessert menu, and the café’s location on a map so customers can easily find it.
 
-Dự án tập trung vào việc tạo ra một giao diện đơn giản, hiện đại và thân thiện với người dùng, phù hợp với mục đích quảng bá hình ảnh của quán cà phê trên Internet.
+This project focuses on creating a simple, modern, and user-friendly interface, suitable for promoting the café’s brand and image on the Internet.
 
 ## Purpose
 
-- Mục tiêu của dự án:
+### The main objectives of this project are:
 
-Giới thiệu thông tin về Green Garden Café
+- Introduce information about Green Garden Café
 
-Hiển thị menu đồ uống và bánh
+- Display the drink and dessert menu
 
-Cung cấp địa chỉ và bản đồ (OpenStreetMap / Google Map)
+- Provide the address and map location (OpenStreetMap / Google Maps)
 
-Tạo trải nghiệm người dùng tốt với giao diện đẹp và dễ sử dụng
+- Create a good user experience with a clean and easy-to-use interface
 
-Thực hành xây dựng website tĩnh bằng HTML, CSS và JavaScript
+- Practice building a static website using HTML, CSS, and JavaScript
 
 ## Features
 
-Website bao gồm các phần chính:
+### The website includes the following main sections:
 
 - Home
 
-Giới thiệu tổng quan về quán
+Overview introduction of the café
 
-Hình ảnh không gian quán
+Images of the café space and atmosphere
 
 - About
 
-Câu chuyện và phong cách của Green Garden Café
+The story and concept behind Green Garden Café
 
-Không gian xanh, yên tĩnh, phù hợp để thư giãn và làm việc
+A green and peaceful environment suitable for relaxing or working
 
-- Menu / Gallery
+- Menu
 
-Các loại cà phê (Espresso, Cappuccino, Latte, Bạc Xỉu)
+Coffee drinks (Espresso, Cappuccino, Latte, Bạc Xỉu)
 
-Đồ uống khác
+Other beverages
 
-Bánh ngọt (Croissant, Macaron, Su kem)
+Desserts (Croissant, Macaron, Cream puffs)
+
+- Gallery
+
+Pictures of the café's interior and exterior
 
 - Location
 
-Bản đồ hiển thị vị trí quán
+Map displaying the café’s location
 
-Tích hợp OpenStreetMap
+Integrated OpenStreetMap
 
 - Contact
 
-Thông tin liên hệ
+Contact information
 
-Giờ mở cửa
+Opening hours
 
 ## Technologies Used
 
-Dự án sử dụng các công nghệ web cơ bản:
+### This project uses basic web technologies:
 
-HTML5 – Cấu trúc website
+- HTML5 – Website structure
 
-Tailwind CSS – Thiết kế giao diện
+- Tailwind CSS – User interface design
 
-JavaScript – Tương tác cơ bản
+- JavaScript – Basic interactivity
 
-OpenStreetMap Embed – Hiển thị vị trí quán
+- OpenStreetMap Embed – Display café location on the map
 
 ## Demo Picture
 
