@@ -41,16 +41,18 @@ const menuItems: MenuItem[] = [
   {
     id: 1,
     name: "Latte Kem Sữa",
-    description: "Cà phê đậm đà hòa quyện cùng kem sữa béo mịn",
+    description:
+      "Latte Kem Sữa hảo hạng với lớp kem sữa béo ngậy quyện cùng cà phê đậm vị",
     price: "75.000đ",
     image: creamy_latte,
     category: "Cà phê",
-    rating: 4.5,
+    rating: 4.8,
   },
   {
     id: 2,
     name: "Cappuccino",
-    description: "Espresso đậm vị hòa quyện cùng sữa nóng và bọt sữa béo nhẹ",
+    description:
+      "Cappuccino Ý với espresso đậm vị, sữa nóng béo ngậy và lớp bọt sữa mịn",
     price: "55.000đ",
     image: cappucino,
     category: "Cà phê",
@@ -59,7 +61,8 @@ const menuItems: MenuItem[] = [
   {
     id: 3,
     name: "Latte",
-    description: "Cà phê latte mềm mại, hương vị nhẹ nhàng, béo mịn và dễ uống",
+    description:
+      "Latte Ý thanh tao với cà phê đậm vị hòa quyện cùng sữa tươi béo ngậy",
     price: "45.000đ",
     image: latte,
     category: "Cà phê",
@@ -68,7 +71,8 @@ const menuItems: MenuItem[] = [
   {
     id: 4,
     name: "Matcha Latte",
-    description: "Trà xanh matcha Nhật Bản cao cấp",
+    description:
+      "Matcha Latte Nhật Bản tinh túy với bột matcha cao cấpcùng sữa tươi béo ngậy",
     price: "65.000đ",
     image:
       "https://images.unsplash.com/photo-1638978127697-e4d55e88a6e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXRjaGElMjBsYXR0ZSUyMGdyZWVuJTIwdGVhfGVufDF8fHx8MTc3Mjg0NTQ2MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
@@ -78,16 +82,18 @@ const menuItems: MenuItem[] = [
   {
     id: 5,
     name: "Croissant",
-    description: "Bánh mì bơ kiểu Pháp với lớp vỏ giòn và ruột mềm xốp",
+    description:
+      "Bánh sừng bò Pháp cao cấp với lớp vỏ giòn rụm và ruột bơ mềm xốp tan chảy trong miệng",
     price: "20.000đ",
     image: croissant,
     category: "Bánh",
-    rating: 4.3,
+    rating: 4.4,
   },
   {
     id: 6,
     name: "Bạc Xỉu",
-    description: "Sữa đặc và sữa tươi kết hợp cùng một chút cà phê đậm vị",
+    description:
+      "Bạc Xỉu Sài Gòn truyền thống với lớp sữa đặc ngọt ngào hòa quyện cùng sữa tươi và cà phê",
     price: "50.000đ",
     image: bac_xiu,
     category: "Cà phê",
@@ -95,8 +101,9 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 7,
-    name: "Cà phê",
-    description: "Cà phê pha phin truyền thống",
+    name: "Cà phê đen",
+    description:
+      "Cà phê đen Việt Nam nguyên chất được pha từ phin truyền thống",
     price: "25.000đ",
     image: coffee,
     category: "Cà phê",
@@ -105,7 +112,8 @@ const menuItems: MenuItem[] = [
   {
     id: 8,
     name: "Bánh su kem",
-    description: "Bánh su kem truyền thống",
+    description:
+      "Bánh su kem Pháp tinh xảo với lớp vỏ giòn tan và kem béo ngậy tan chảy trong miệng",
     price: "15.000đ",
     image: banh_xu_kem,
     category: "Bánh",
@@ -115,7 +123,7 @@ const menuItems: MenuItem[] = [
     id: 9,
     name: "Macaron",
     description:
-      "Bánh mì bơ truyền thống kiểu Pháp với lớp vỏ giòn và ruột mềm xốp",
+      "Macaron Pháp thanh lịch với hai lớp vỏ giòn và nhân kem béo ngậy mềm mịn ở giữa",
     price: "15.000đ",
     image: macaron,
     category: "Bánh",

@@ -17,6 +17,11 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
+  };
+
   const scrollToSection = (id: string) => {
     // If not on home page, navigate to home first
     if (location.pathname !== "/") {
@@ -40,12 +45,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <Link
-              to="/"
-              className="text-2xl font-bold text-green-700 hover:text-green-800 hover:scale-110 hover:text-shadow-lg transition-all duration-300 transform"
+            <button
+              onClick={scrollToTop}
+              className="text-2xl font-bold text-green-700 hover:text-green-800 hover:scale-110 hover:text-shadow-lg transition-all duration-300 transform cursor-pointer"
             >
               Green Garden Café
-            </Link>
+            </button>
           </div>
 
           {/* Desktop Menu */}

@@ -1,4 +1,4 @@
-import { X, ShoppingCart } from "lucide-react";
+import { X, ShoppingCart, Star } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
 
 import creamy_latte from "../../assets/images/creamy_latte.jpg";
@@ -17,7 +17,24 @@ interface MenuItem {
   price: string;
   image: string;
   category: string;
+  rating: number;
 }
+
+const StarRating = ({ rating }: { rating: number }) => {
+  const stars = [];
+  const roundedRating = rating >= 4.5 ? 5 : Math.floor(rating);
+
+  for (let i = 1; i <= 5; i++) {
+    if (i <= roundedRating) {
+      stars.push(
+        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />,
+      );
+    } else {
+      stars.push(<Star key={i} className="w-4 h-4 text-gray-300" />);
+    }
+  }
+  return <div className="flex">{stars}</div>;
+};
 
 const menuItems: MenuItem[] = [
   {
@@ -27,6 +44,7 @@ const menuItems: MenuItem[] = [
     price: "75.000đ",
     image: creamy_latte,
     category: "Cà phê",
+    rating: 4.5,
   },
   {
     id: 2,
@@ -35,6 +53,7 @@ const menuItems: MenuItem[] = [
     price: "55.000đ",
     image: cappucino,
     category: "Cà phê",
+    rating: 4.8,
   },
   {
     id: 3,
@@ -43,6 +62,7 @@ const menuItems: MenuItem[] = [
     price: "45.000đ",
     image: latte,
     category: "Cà phê",
+    rating: 4.6,
   },
   {
     id: 4,
@@ -52,6 +72,7 @@ const menuItems: MenuItem[] = [
     image:
       "https://images.unsplash.com/photo-1638978127697-e4d55e88a6e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXRjaGElMjBsYXR0ZSUyMGdyZWVuJTIwdGVhfGVufDF8fHx8MTc3Mjg0NTQ2MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     category: "Trà",
+    rating: 4.7,
   },
   {
     id: 5,
@@ -60,6 +81,7 @@ const menuItems: MenuItem[] = [
     price: "20.000đ",
     image: croissant,
     category: "Bánh",
+    rating: 4.3,
   },
   {
     id: 6,
@@ -68,6 +90,7 @@ const menuItems: MenuItem[] = [
     price: "50.000đ",
     image: bac_xiu,
     category: "Cà phê",
+    rating: 4.4,
   },
   {
     id: 7,
@@ -76,6 +99,7 @@ const menuItems: MenuItem[] = [
     price: "25.000đ",
     image: coffee,
     category: "Cà phê",
+    rating: 3.7,
   },
   {
     id: 8,
@@ -84,6 +108,7 @@ const menuItems: MenuItem[] = [
     price: "15.000đ",
     image: banh_xu_kem,
     category: "Bánh",
+    rating: 4.2,
   },
   {
     id: 9,
@@ -93,6 +118,7 @@ const menuItems: MenuItem[] = [
     price: "15.000đ",
     image: macaron,
     category: "Bánh",
+    rating: 4.7,
   },
 ];
 
@@ -186,10 +212,11 @@ export function MenuModal({ isOpen, onClose }: MenuModalProps) {
                         <p className="text-gray-600 text-sm mb-3">
                           {item.description}
                         </p>
+                        <StarRating rating={item.rating} />
                         <button
                           id={`add-to-cart-${item.id}`}
                           onClick={() => handleAddToCart(item)}
-                          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition-colors flex items-center justify-center space-x-2 text-sm cursor-pointer"
+                          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition-colors flex items-center justify-center space-x-2 text-sm cursor-pointer mt-3"
                         >
                           <ShoppingCart size={16} />
                           <span>Thêm vào giỏ</span>

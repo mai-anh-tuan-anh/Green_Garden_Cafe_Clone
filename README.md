@@ -74,12 +74,25 @@ Opening hours
 
 ## Demo Picture
 
-![home](image.png)
+-home
+![home](image-6.png)
+-about
 ![about](image-1.png)
+-menu
 ![menu](image-2.png)
+-gallery
 ![gallery](image-3.png)
+-location
 ![location](image-4.png)
+-contact
 ![contact](image-5.png)
+-footer
+![footer](image-10.png)
+-menuModal
+![menuModal](image-7.png)
+-cart
+![cart](image-8.png)
+![cart1](image-9.png)
 
 ## Running the code
 

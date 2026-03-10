@@ -16,7 +16,7 @@ export function Location() {
 
         <div className="grid lg:grid-cols-2 gap-8 items-start" data-aos="fade">
           {/* Map */}
-          <div className="rounded-lg overflow-hidden shadow-xl h-[450px] relative">
+          <div className="rounded-lg overflow-hidden shadow-xl h-[450px] relative hover:shadow-2xl transition-shadow duration-300">
             <iframe
               key="osm-map-iframe"
               src="https://www.openstreetmap.org/export/embed.html?bbox=105.7485,20.9875,105.7539,20.9915&layer=mapnik&marker=20.98943,105.75122"
