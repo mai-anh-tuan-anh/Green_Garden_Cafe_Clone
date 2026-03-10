@@ -14,7 +14,7 @@ export function Location() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 items-start" data-aos="fade">
           {/* Map */}
           <div className="rounded-lg overflow-hidden shadow-xl h-[450px] relative">
             <iframe

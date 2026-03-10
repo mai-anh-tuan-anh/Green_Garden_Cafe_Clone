@@ -66,9 +66,10 @@ export function Gallery() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {images.map((image) => (
+          {images.map((image, index) => (
             <div
               key={image.id}
+              data-aos="slide-up"
               className="relative overflow-hidden rounded-lg shadow-lg group aspect-square"
             >
               <img
