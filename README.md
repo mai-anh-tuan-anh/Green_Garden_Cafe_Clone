@@ -166,6 +166,39 @@ npm run dev
 - **SEO Optimized**: Meta tags and semantic HTML
 - **Accessibility**: ARIA labels and keyboard navigation
 
+## Demo Pictures
+
+### Website Screenshots
+
+- **Home Page**
+  ![home](image-6.png)
+- **About Section**
+  ![about](image-1.png)
+- **Menu Page**
+  ![menu](image-2.png)
+- **Gallery Section**
+  ![gallery](image-3.png)
+- **Location & Map**
+  ![location](image-4.png)
+- **Contact Form**
+  ![contact](image-5.png)
+- **Footer**
+  ![footer](image-10.png)
+- **Menu Modal**
+  ![menuModal](image-7.png)
+- **Shopping Cart**
+  ![cart](image-8.png)
+  ![cart1](image-9.png)
+
+### UI Features
+
+- **Product Cards with HOT SALE Badges**
+- **Smooth Cart Sidebar Animation**
+- **Responsive Navigation**
+- **Interactive Map Integration**
+- **Modern Button Design**
+- **Professional Layout**
+
 ## Future Enhancements
 
 - **Payment Integration**: Stripe/VNPay integration
