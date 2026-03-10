@@ -1,4 +1,7 @@
 import { Card } from "./ui/card";
+import { ShoppingCart } from "lucide-react";
+import { useCart } from "../contexts/CartContext";
+
 import { Star } from "lucide-react";
 import creamy_latte from "../../assets/images/creamy_latte.jpg";
 import cappucino from "../../assets/images/cappucino.jpg";
@@ -66,7 +69,7 @@ const menuItems: MenuItem[] = [
     id: 4,
     name: "Matcha Latte",
     description: "Trà xanh matcha Nhật Bản cao cấp",
-    price: "55.000đ - 65.000đ",
+    price: "65.000đ",
     image:
       "https://images.unsplash.com/photo-1638978127697-e4d55e88a6e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtYXRjaGElMjBsYXR0ZSUyMGdyZWVuJTIwdGVhfGVufDF8fHx8MTc3Mjg0NTQ2MHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     category: "Trà",
@@ -76,7 +79,7 @@ const menuItems: MenuItem[] = [
     id: 5,
     name: "Croissant",
     description: "Bánh mì bơ kiểu Pháp với lớp vỏ giòn và ruột mềm xốp",
-    price: "20.000đ - 40.000đ x 1 cái",
+    price: "20.000đ",
     image: croissant,
     category: "Bánh",
     rating: 4.3,
@@ -85,7 +88,7 @@ const menuItems: MenuItem[] = [
     id: 6,
     name: "Bạc Xỉu",
     description: "Sữa đặc và sữa tươi kết hợp cùng một chút cà phê đậm vị",
-    price: "35.000đ - 50.000đ",
+    price: "50.000đ",
     image: bac_xiu,
     category: "Cà phê",
     rating: 4.4,
@@ -94,7 +97,7 @@ const menuItems: MenuItem[] = [
     id: 7,
     name: "Cà phê",
     description: "Cà phê pha phin truyền thống",
-    price: "25.000đ - 30.000đ",
+    price: "25.000đ",
     image: coffee,
     category: "Cà phê",
     rating: 3.7,
@@ -103,7 +106,7 @@ const menuItems: MenuItem[] = [
     id: 8,
     name: "Bánh su kem",
     description: "Bánh su kem truyền thống",
-    price: "25.000đ x 3 cái",
+    price: "15.000đ",
     image: banh_xu_kem,
     category: "Bánh",
     rating: 4.2,
@@ -113,7 +116,7 @@ const menuItems: MenuItem[] = [
     name: "Macaron",
     description:
       "Bánh mì bơ truyền thống kiểu Pháp với lớp vỏ giòn và ruột mềm xốp",
-    price: "15.000đ - 25.000đ x 1 cái",
+    price: "15.000đ",
     image: macaron,
     category: "Bánh",
     rating: 4.7,
@@ -121,6 +124,19 @@ const menuItems: MenuItem[] = [
 ];
 
 export function Menu() {
+  const { addToCart, setIsCartOpen } = useCart();
+
+  const handleAddToCart = (item: MenuItem) => {
+    addToCart({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      image: item.image,
+    });
+    // Show a brief notification (optional)
+    setIsCartOpen(true);
+  };
+
   return (
     <section id="menu" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -139,6 +155,7 @@ export function Menu() {
             <Card
               key={item.id}
               data-aos="fade-up"
+              data-aos-delay={index * 100}
               className="overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-white"
             >
               <div className="relative h-64 overflow-hidden">
@@ -158,6 +175,13 @@ export function Menu() {
                 </div>
                 <p className="text-gray-600 mb-2">{item.description}</p>
                 <StarRating rating={item.rating} />
+                <button
+                  onClick={() => handleAddToCart(item)}
+                  className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"
+                >
+                  <ShoppingCart size={20} />
+                  <span>Thêm vào giỏ</span>
+                </button>
               </div>
             </Card>
           ))}

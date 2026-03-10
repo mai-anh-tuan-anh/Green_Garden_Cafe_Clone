@@ -1,14 +1,9 @@
 import { Coffee } from "lucide-react";
+import { Link } from "react-router";
+
 import hero from "../../assets/images/hero.jpg";
 import logo from "../../assets/svg/logo.svg";
 export function Hero() {
-  const scrollToMenu = () => {
-    const element = document.getElementById("menu");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
     <section
       id="hero"
@@ -37,12 +32,12 @@ export function Hero() {
         <p className="text-xl md:text-2xl mb-8 text-white/80">
           Không gian xanh mát - Cà phê thơm ngon - Trải nghiệm tuyệt vời
         </p>
-        <button
-          onClick={scrollToMenu}
-          className="bg-green-600 hover:bg-white hover:text-green-600 text-white px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-green-600"
+        <Link
+          to="/menu"
+          className="inline-block bg-green-600 hover:bg-white hover:text-green-600 text-white px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-green-600 cursor-pointer"
         >
           Xem Menu
-        </button>
+        </Link>
       </div>
 
       {/* Scroll Indicator */}
