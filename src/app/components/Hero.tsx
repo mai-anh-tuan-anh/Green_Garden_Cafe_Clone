@@ -34,7 +34,7 @@ export function Hero() {
         </p>
         <Link
           to="/menu"
-          className="inline-block bg-green-600 hover:bg-white hover:text-green-600 text-white px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-green-600 cursor-pointer"
+          className="inline-block bg-green-600 hover:bg-white  text-white px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-green-600 cursor-pointer"
         >
           Xem Toàn Bộ Menu
         </Link>

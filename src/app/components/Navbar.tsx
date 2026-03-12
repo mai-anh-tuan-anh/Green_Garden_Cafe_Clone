@@ -1,12 +1,26 @@
 import { useState, useEffect } from "react";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import {
+  Menu,
+  X,
+  ShoppingCart,
+  User,
+  LogOut,
+  Receipt,
+  Moon,
+  Sun,
+} from "lucide-react";
 import { useCart } from "../contexts/CartContext";
+import { useAuth } from "../contexts/AuthContext";
+import { useDarkMode } from "../contexts/DarkModeContext";
 import { Link, useLocation } from "react-router";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const { getTotalItems, setIsCartOpen } = useCart();
+  const { user, logout, isAuthenticated } = useAuth();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
   const location = useLocation();
 
   useEffect(() => {
@@ -39,7 +53,7 @@ export function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-gray-200 shadow-md" : "bg-gray-200/95 backdrop-blur-sm"
+        isScrolled ? "bg-gray-300 shadow-md" : "bg-gray-300 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -109,6 +123,47 @@ export function Navbar() {
                 </span>
               )}
             </button>
+
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-700 hover:text-green-700 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+              title={isDarkMode ? "Light Mode" : "Dark Mode"}
+            >
+              {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
+            {/* Auth Button */}
+            {isAuthenticated() ? (
+              <div className="flex items-center space-x-2">
+                <Link
+                  to="/order-history"
+                  className="p-2 text-gray-700 hover:text-green-700 hover:bg-gray-100 rounded-full transition-colors"
+                  title="Lịch sử hóa đơn"
+                >
+                  <Receipt size={20} />
+                </Link>
+                <div className="flex items-center space-x-2 px-3 py-2 bg-gray-100 rounded-full">
+                  <User size={16} />
+                  <span className="text-sm text-gray-700">{user?.name}</span>
+                </div>
+                <button
+                  onClick={() => setShowLogoutConfirm(true)}
+                  className="p-2 text-gray-700 hover:text-red-600 hover:bg-gray-100 rounded-full transition-colors"
+                  title="Đăng xuất"
+                >
+                  <LogOut size={20} />
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors"
+              >
+                <User size={16} />
+                <span>Đăng nhập</span>
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button and Cart */}
@@ -124,6 +179,37 @@ export function Navbar() {
                 </span>
               )}
             </button>
+
+            {/* Mobile Auth Button */}
+            {isAuthenticated() ? (
+              <div className="flex items-center space-x-1">
+                <Link
+                  to="/order-history"
+                  className="p-2 text-gray-700 hover:text-green-700 hover:bg-gray-100 rounded-full transition-colors"
+                  title="Lịch sử hóa đơn"
+                >
+                  <Receipt size={18} />
+                </Link>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="p-2 text-gray-700 hover:text-green-700 hover:bg-gray-100 rounded-full transition-colors"
+                title="Đăng nhập"
+              >
+                <User size={18} />
+              </Link>
+            )}
+
+            {/* Mobile Dark Mode Toggle */}
+            <button
+              onClick={toggleDarkMode}
+              className="p-2 text-gray-700 hover:text-green-700 hover:bg-gray-100 rounded-full transition-colors"
+              title={isDarkMode ? "Light Mode" : "Dark Mode"}
+            >
+              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-md text-gray-700 hover:text-green-700 hover:bg-gray-100 transition-colors cursor-pointer"
@@ -179,10 +265,75 @@ export function Navbar() {
                   Trang chủ
                 </Link>
               )}
+
+              {/* Mobile Auth Menu */}
+              {isAuthenticated() && (
+                <>
+                  <div className="border-t pt-3">
+                    <div className="px-4 py-2 text-sm text-gray-600">
+                      Xin chào, {user?.name}
+                    </div>
+                    <Link
+                      to="/order-history"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-700 hover:bg-gray-50 transition-colors rounded-md"
+                    >
+                      <Receipt size={16} />
+                      <span>Lịch sử hóa đơn</span>
+                    </Link>
+                    <button
+                      onClick={() => setShowLogoutConfirm(true)}
+                      className="flex items-center space-x-2 px-4 py-2 text-red-600 hover:text-red-700 hover:bg-gray-50 transition-colors rounded-md"
+                    >
+                      <LogOut size={16} />
+                      <span>Đăng xuất</span>
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}
       </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <div className="fixed mt-100 inset-0 flex items-center justify-center p-4 z-[9999]">
+          <div className="bg-gray-900 bg-opacity-95 rounded-lg max-w-sm w-full p-6 shadow-2xl border border-gray-700">
+            <div className="text-center">
+              <div className="mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                  <LogOut size={24} className="text-red-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Xác nhận đăng xuất
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Bạn có chắc muốn đăng xuất khỏi tài khoản không?
+                </p>
+              </div>
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => setShowLogoutConfirm(false)}
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors"
+                >
+                  Hủy
+                </button>
+                <button
+                  onClick={() => {
+                    logout();
+                    setShowLogoutConfirm(false);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

@@ -1,3 +1,423 @@
-@import './fonts.css';
-@import './tailwind.css';
-@import './theme.css';
+@import "./fonts.css";
+@import "./tailwind.css";
+@import "./theme.css";
+
+/* Dark mode styles */
+.dark {
+  background-color: #000000 !important; /* Nền đen cho toàn bộ trang */
+  color: #ffffff !important; /* Chữ trắng cho toàn bộ trang */
+}
+
+/* Dark mode cho navbar - background tối hơn */
+.dark .bg-white {
+  background-color: #1d2842 !important; /* Navbar background tối hơn */
+}
+
+.dark .bg-gray-50 {
+  background-color: #151e35 !important; /* Navbar background tối hơn */
+}
+
+.dark .bg-gray-200 {
+  background-color: #1d2842 !important; /* Navbar background tối hơn khi scroll */
+}
+
+.dark .bg-gray-200\/95 {
+  background-color: #1d2842 !important; /* Navbar background tối hơn khi không scroll */
+}
+
+/* Light mode styles (đảm bảo màu chủ đạo xanh lá cây) */
+body {
+  background-color: #ecfdf5; /* Màu xanh lá cây nhạt hơn cho light mode */
+}
+
+/* Thêm border radius 3px cho tất cả các thanh có background xanh lá cây */
+.bg-green-400,
+.bg-green-600 {
+  border-radius: 3px !important;
+}
+
+/* Dark mode hover effect cho button gửi tin nhắn */
+.dark .hover\:bg-green-700:hover {
+  background-color: #05913a !important; /* Màu đậm hơn trong dark mode */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important; /* Box shadow trong dark mode */
+  cursor: pointer !important; /* Thêm cursor pointer */
+}
+.dark .bg-gray-200 {
+  background-color: #1d2842 !important; /* Màu tối hơn */
+  border-radius: 3px;
+}
+
+.dark .bg-gray-50 {
+  background-color: #1c2847 !important; /* Màu tối hơn */
+}
+.dark .bg-gray-100 {
+  background-color: #4b5563;
+}
+
+.dark .text-gray-800 {
+  color: #f3f4f6;
+}
+
+.dark .text-gray-700 {
+  color: #d1d5db;
+}
+
+.dark .text-gray-600 {
+  color: #3b5583;
+}
+
+.dark .border-gray-300 {
+  border-color: #56667e;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #4b5563;
+}
+
+.dark .hover\:bg-white:hover {
+  background-color: #4b5563;
+}
+
+/* Dark mode styles for form elements - Tăng specificity để không bị Tailwind ghi đè */
+.dark .dark label,
+.dark label.dark {
+  color: #ffffff !important; /* Chữ trắng cho labels */
+  font-weight: 500 !important; /* Đảm bảo font-weight để label nổi bật */
+}
+
+.dark input[type="text"],
+.dark input[type="email"],
+.dark input[type="tel"],
+.dark textarea {
+  background-color: #374151 !important; /* Darker background for inputs */
+  border-color: #4b5563 !important; /* Lighter border for inputs */
+  color: #ffffff !important; /* Chữ trắng cho input values */
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #9aa1ac !important; /* Lighter placeholder text */
+  opacity: 1 !important; /* Đảm bảo placeholder không bị mờ */
+}
+
+.dark button[type="submit"] {
+  background-color: #16a34a !important; /* Green button for submit */
+  color: #ffffff !important;
+}
+
+/* Đảm bảo màu xanh lá cây chủ đạo trong cả hai chế độ */
+.bg-green-600 {
+  background-color: #16a34a !important;
+}
+
+.hover\:bg-green-700:hover {
+  background-color: #15803d !important;
+}
+
+.text-green-600 {
+  color: #16a34a !important;
+}
+
+.hover\:text-green-700:hover {
+  color: #15803d !important;
+}
+
+/* Đảm bảo màu trắng cho form trong cả hai chế độ */
+.bg-white {
+  background-color: #ffffff !important;
+}
+
+.text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.text-gray-700 {
+  color: #374151 !important;
+}
+
+.text-gray-600 {
+  color: #6b7280 !important;
+}
+
+.border-gray-300 {
+  border-color: #d1d5db !important;
+}
+
+/* Đảm bảo màu cho placeholder và giữ chỗ */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af !important;
+}
+
+/* Đảm bảo màu cho các icon */
+.text-gray-500 {
+  color: #6b7280 !important;
+}
+
+.hover\:text-gray-700:hover {
+  color: #374151 !important;
+}
+
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6 !important;
+}
+
+/* Đảm bảo các element trong dark mode không bị ảnh hưởng */
+.dark .bg-green-600,
+.dark .hover\:bg-green-700:hover,
+.dark .text-green-600,
+.dark .hover\:text-green-700:hover,
+.dark .bg-white,
+.dark .text-gray-800,
+.dark .text-gray-700,
+.dark .text-gray-600,
+.dark .border-gray-300,
+.dark .hover\:bg-gray-100:hover,
+.dark .hover\:bg-white:hover {
+  color: #ffffff !important; /* Đảm bảo text color trong dark mode */
+}
+
+.dark .text-gray-700,
+.dark .text-gray-600,
+.dark .border-gray-300,
+.dark .hover\:bg-gray-100:hover,
+.dark .hover\:bg-white:hover {
+  color: #ffffff !important; /* Đảm bảo tất cả chữ trắng trong dark mode */
+}
+
+/* Dark mode styles cho phần mô tả sản phẩm */
+.dark .product-description,
+.dark .product-description p,
+.dark .product-description .text-gray-600,
+.dark .product-description .text-gray-700 {
+  background-color: transparent !important; /* Background transparent để thấy background đen của trang */
+  color: #7c2a2a !important; /* Chữ trắng */
+  border-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ) !important; /* Viền trắng mờ để phân biệt với nền đen */
+}
+
+/* Dark mode styles cho phần hóa đơn (OrderHistoryPage) */
+.dark .bg-gray-50 {
+  background-color: #0f172a !important; /* Background tối hơn cho phần hóa đơn */
+}
+
+.dark .bg-white {
+  background-color: #1f2937 !important; /* Background tối hơn cho các thẻ hóa đơn */
+}
+
+.dark .text-gray-800 {
+  color: #e5e7eb !important; /* Chữ xám nhạt hơn cho các tiêu đề */
+}
+
+.dark .text-gray-900 {
+  color: #e5e7eb !important; /* Chữ xám nhạt hơn cho các text quan trọng */
+}
+
+.dark .text-gray-700 {
+  color: #9ca3af !important; /* Chữ xám nhạt hơn cho các text phụ */
+}
+
+.dark .text-gray-600 {
+  color: #858d9b !important; /* Chữ xám nhạt hơn cho các text mô tả */
+}
+
+.dark .text-gray-500 {
+  color: #6b7280 !important; /* Chữ xám cho các icon */
+}
+
+.dark .text-blue-700 {
+  color: #3b82f6 !important; /* Chữ xanh đậm hơn cho text lưu ý */
+}
+
+.dark .text-blue-900 {
+  color: #60a5fa !important; /* Chữ xanh sáng cho tiêu đề lưu ý */
+}
+
+.dark .border-gray-100 {
+  border-color: #374151 !important; /* Viền tối hơn cho dark mode */
+}
+
+.dark .border-gray-600 {
+  border-color: #374151 !important; /* Viền tối hơn cho dark mode */
+}
+
+.dark .border-gray-700 {
+  border-color: #374151 !important; /* Viền tối hơn cho dark mode */
+}
+
+.dark .bg-blue-50 {
+  background-color: #1e3a8a !important; /* Background xanh đậm hơn cho phần lưu ý */
+}
+
+.dark .bg-yellow-100 {
+  background-color: #f8a648 !important; /* Background vàng đậm hơn cho trạng thái */
+}
+
+.dark .text-yellow-600 {
+  color: #fbbf24 !important; /* Chữ vàng sáng cho trạng thái */
+}
+
+.dark .bg-yellow-200 {
+  background-color: #d4881d !important; /* Background vàng đậm hơn cho hover */
+}
+
+.dark .text-gray-300 {
+  color: #6b7280 !important; /* Chữ xám nhạt hơn cho label trong form */
+}
+
+.dark .bg-gray-800 {
+  background-color: #1f2937 !important; /* Background tối hơn cho input và textarea */
+}
+
+.dark .bg-gray-300 {
+  background-color: #252c36 !important; /* Background xám tối hơn cho button hủy */
+}
+
+.dark .text-gray-400 {
+  color: #748dbd !important; /* Chữ xám cho icon trong modal */
+}
+
+/* Dark mode hover effects cho OrderHistoryPage */
+.dark .hover\:bg-gray-100:hover {
+  background-color: #4b5563 !important; /* Hover sáng hơn cho dark mode */
+}
+
+.dark .hover\:bg-yellow-200:hover {
+  background-color: #ec922c !important; /* Hover vàng đậm hơn cho dark mode */
+}
+
+.dark .hover\:bg-gray-400:hover {
+  background-color: #6b7280 !important; /* Hover xám đậm hơn cho dark mode */
+}
+
+.dark .hover\:bg-green-700:hover {
+  background-color: #05913a !important; /* Hover xanh đậm hơn cho dark mode */
+}
+
+/* Dark mode styles cho các ô category trong MenuPage */
+.dark .bg-gray-100 {
+  background-color: #374151 !important; /* Background tối hơn cho các ô category */
+  cursor: pointer !important; /* Thêm cursor pointer */
+  transition: all 0.35s ease !important; /* Thêm transition mượt mà */
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #4b5563 !important; /* Hover sáng hơn 1 chút cho các ô category */
+}
+
+.dark .bg-gray-200 {
+  background-color: #374151 !important; /* Background tối hơn cho các ô category trong dark mode */
+}
+
+.dark .hover\:bg-gray-300:hover {
+  background-color: #4b5563 !important; /* Hover sáng hơn 1 chút cho các ô category trong dark mode */
+}
+
+/* Light mode styles cho các category buttons trong MenuPage */
+.bg-gray-200 {
+  cursor: pointer !important; /* Thêm cursor pointer cho light mode */
+}
+
+.hover\:bg-gray-300:hover {
+  cursor: pointer !important; /* Thêm cursor pointer cho light mode hover */
+}
+
+/* Dark mode styles cho icons trong Footer.tsx */
+.dark .text-gray-400 {
+  color: #6b7280 !important; /* Chữ xám cho icons trong footer */
+  cursor: pointer;
+}
+
+.dark .hover\:text-green-400:hover {
+  color: #16a34a !important; /* Hover đổi thành màu xanh đặc trưng cho icons trong footer */
+}
+
+/* Dark mode styles cho price trong MenuPage */
+.dark .text-green-600 {
+  color: #16a34a !important;
+  font-weight: 500; /* Đổi color của price thành màu xanh lá trong dark mode */
+}
+
+/* Dark mode styles cho phần đánh giá của hóa đơn trong OrderHistoryPage */
+.dark .text-yellow-600 {
+  cursor: pointer !important; /* Thêm cursor pointer cho đánh giá */
+}
+
+.dark .bg-yellow-100 {
+  cursor: pointer !important; /* Thêm cursor pointer cho background đánh giá */
+}
+
+.dark .text-yellow-800 {
+  cursor: pointer !important; /* Thêm cursor pointer cho text đánh giá */
+}
+
+.dark .hover\:bg-yellow-200:hover {
+  cursor: pointer !important; /* Thêm cursor pointer cho hover đánh giá */
+}
+
+.dark .text-gray-300 {
+  cursor: pointer !important; /* Thêm cursor pointer cho tên sản phẩm */
+}
+
+/* Dark mode styles cho textarea trong phần bình luận */
+.dark .bg-gray-800 {
+  background-color: #1f2937 !important; /* Background tối hơn cho textarea */
+  border-color: #4b5563 !important; /* Viền tối hơn */
+  color: #ffffff !important; /* Chữ trắng cho textarea */
+}
+
+.dark .bg-gray-800:hover {
+  background-color: #1f2937 !important; /* Giữ nguyên màu khi hover */
+}
+
+.dark textarea:focus {
+  background-color: #1f2937 !important; /* Giữ nguyên màu khi focus */
+}
+
+.dark .border-gray-600:hover {
+  border-color: #4b5563 !important; /* Giữ nguyên màu khi hover */
+}
+
+/* Light mode styles cho các buttons trong Footer.tsx */
+.text-gray-400 {
+  cursor: pointer !important; /* Thêm cursor pointer cho light mode */
+}
+
+.hover\:text-green-400:hover {
+  cursor: pointer !important; /* Thêm cursor pointer cho hover light mode */
+}
+
+/* Light mode styles cho button "Gửi tin nhắn" trong Contact.tsx */
+.bg-green-600 {
+  cursor: pointer !important; /* Thêm cursor pointer cho button Gửi tin nhắn */
+}
+
+.hover\:bg-green-700:hover {
+  cursor: pointer !important; /* Thêm cursor pointer cho hover button Gửi tin nhắn */
+}
+
+/* Dark mode styles cho button Đăng xuất trong Navbar */
+.dark .text-red-600 {
+  cursor: pointer !important; /* Thêm cursor pointer cho button Đăng xuất */
+}
+
+.dark .hover\:text-red-700:hover {
+  cursor: pointer !important; /* Thêm cursor pointer cho hover button Đăng xuất */
+}
+
+.dark .hover\:bg-gray-50:hover {
+  cursor: pointer !important; /* Thêm cursor pointer cho background hover */
+}
+
+/* Dark mode styles cho các icons hover trong Footer.tsx */
+.dark .bg-gray-800:hover {
+  background-color: #16a34a !important; /* Hover đổi background thành màu xanh lá cây */
+}
+
+.dark .bg-gray-600:hover {
+  background-color: #16a34a !important; /* Hover đổi background thành màu xanh lá cây */
+}

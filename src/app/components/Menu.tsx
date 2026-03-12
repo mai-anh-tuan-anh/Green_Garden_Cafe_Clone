@@ -1,6 +1,7 @@
 import { Card } from "./ui/card";
 import { ShoppingCart } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
+import { useRating } from "../contexts/RatingContext";
 
 import { Star } from "lucide-react";
 import creamy_latte from "../../assets/images/creamy_latte.jpg";
@@ -21,7 +22,13 @@ interface MenuItem {
   rating: number;
 }
 
-const StarRating = ({ rating }: { rating: number }) => {
+const StarRating = ({
+  rating,
+  ratingCount,
+}: {
+  rating: number;
+  ratingCount?: number;
+}) => {
   const stars = [];
   const roundedRating = rating >= 4.5 ? 5 : Math.floor(rating);
 
@@ -34,7 +41,17 @@ const StarRating = ({ rating }: { rating: number }) => {
       stars.push(<Star key={i} className="w-4 h-4 text-gray-300" />);
     }
   }
-  return <div className="flex">{stars}</div>;
+
+  return (
+    <div className="flex items-center space-x-2">
+      <div className="flex">{stars}</div>
+      <span className="text-sm text-gray-600">
+        {rating > 0
+          ? `${rating} (${ratingCount || 0} đánh giá)`
+          : "Chưa có đánh giá"}
+      </span>
+    </div>
+  );
 };
 
 const menuItems: MenuItem[] = [
@@ -101,7 +118,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 7,
-    name: "Cà phê đen",
+    name: "Cà Phê Đen",
     description:
       "Cà phê đen Việt Nam nguyên chất được pha từ phin truyền thống",
     price: "25.000đ",
@@ -111,7 +128,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 8,
-    name: "Bánh su kem",
+    name: "Bánh Su Kem",
     description:
       "Bánh su kem Pháp tinh xảo với lớp vỏ giòn tan và kem béo ngậy tan chảy trong miệng",
     price: "15.000đ",
@@ -133,6 +150,17 @@ const menuItems: MenuItem[] = [
 
 export function Menu() {
   const { addToCart, setIsCartOpen } = useCart();
+  const { getProductAverageRating, getProductRatingCount } = useRating();
+
+  const getMenuItemsWithRatings = () => {
+    return menuItems.map((item) => ({
+      ...item,
+      rating: getProductAverageRating(item.id) || item.rating,
+      ratingCount: getProductRatingCount(item.id),
+    }));
+  };
+
+  const menuItemsWithRatings = getMenuItemsWithRatings();
 
   const handleAddToCart = (item: MenuItem) => {
     addToCart({
@@ -159,14 +187,14 @@ export function Menu() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {menuItems.map((item, index) => (
+          {menuItemsWithRatings.map((item, index) => (
             <Card
               key={item.id}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className="overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-white"
+              className="overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-white h-full flex flex-col"
             >
-              <div className="relative h-64 overflow-hidden">
+              <div className="relative h-64 overflow-hidden flex-shrink-0">
                 <img
                   src={item.image}
                   alt={item.name}
@@ -176,13 +204,18 @@ export function Menu() {
                   {item.category}
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl text-gray-800">{item.name}</h3>
-                  <span className="text-green-700 text-lg">{item.price}</span>
+                  <span className="text-green-600 text-lg">{item.price}</span>
                 </div>
-                <p className="text-gray-600 mb-2">{item.description}</p>
-                <StarRating rating={item.rating} />
+                <p className="text-gray-600 mb-2 flex-grow product-description">
+                  {item.description}
+                </p>
+                <StarRating
+                  rating={item.rating}
+                  ratingCount={item.ratingCount}
+                />
                 <button
                   onClick={() => handleAddToCart(item)}
                   className="w-full mt-3 bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg transition-colors flex items-center justify-center space-x-2 cursor-pointer"

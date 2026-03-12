@@ -5,7 +5,7 @@ export function Location() {
     <section id="location" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl mb-4 text-gray-800 bg-green-400 w-full py-4 text-center">
+          <h2 className="text-4xl md:text-5xl mb-4 text-gray-800 bg-green-400 w-full py-4 text-center rounded-[3px]">
             Địa chỉ
           </h2>
           <div className="w-24 h-1 bg-green-600 mx-auto mb-4" />
@@ -44,7 +44,7 @@ export function Location() {
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-start space-x-4">
                 <div className="bg-green-100 p-3 rounded-full">
-                  <MapPin className="text-green-600" size={24} />
+                  <MapPin className="text-black" size={24} />
                 </div>
                 <div>
                   <h3 className="text-xl mb-2 text-gray-800">Địa chỉ</h3>
@@ -56,7 +56,7 @@ export function Location() {
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-start space-x-4">
                 <div className="bg-green-100 p-3 rounded-full">
-                  <Phone className="text-green-600" size={24} />
+                  <Phone className="text-black" size={24} />
                 </div>
                 <div>
                   <h3 className="text-xl mb-2 text-gray-800">
@@ -73,7 +73,7 @@ export function Location() {
             <div className="bg-white p-6 rounded-lg shadow-lg">
               <div className="flex items-start space-x-4">
                 <div className="bg-green-100 p-3 rounded-full">
-                  <Clock className="text-green-600" size={24} />
+                  <Clock className="text-black" size={24} />
                 </div>
                 <div>
                   <h3 className="text-xl mb-2 text-gray-800">Giờ mở cửa</h3>

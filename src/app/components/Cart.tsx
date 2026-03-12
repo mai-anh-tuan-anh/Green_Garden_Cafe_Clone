@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X, Plus, Minus, ShoppingBag, Trash2 } from "lucide-react";
 import { useCart } from "../contexts/CartContext";
+import { useAuth } from "../contexts/AuthContext";
 
 export function Cart() {
   const {
@@ -12,9 +13,10 @@ export function Cart() {
     isCartOpen,
     setIsCartOpen,
   } = useCart();
+  const { user } = useAuth();
 
   const [orderForm, setOrderForm] = useState({
-    name: "",
+    name: user?.name || "",
     phone: "",
     address: "",
     note: "",
@@ -37,12 +39,39 @@ export function Cart() {
 
   const handleSubmitOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock order submission
+
+    // Save order to localStorage
+    const order = {
+      id: Date.now().toString(),
+      date: new Date().toISOString(),
+      items: cartItems.map((item) => ({
+        id: item.id,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      totalAmount: getTotalPrice().toLocaleString("vi-VN") + "đ",
+      status: "completed" as const,
+      customerInfo: {
+        name: orderForm.name,
+        phone: orderForm.phone,
+        address: orderForm.address,
+        note: orderForm.note,
+      },
+      userName: user?.name || "guest", // Thêm userName để biết tài khoản nào đã đặt
+    };
+
+    const existingOrders = JSON.parse(
+      localStorage.getItem("orderHistory") || "[]",
+    );
+    existingOrders.push(order);
+    localStorage.setItem("orderHistory", JSON.stringify(existingOrders));
+
     alert(
       `Đặt hàng thành công!\n\nTên: ${orderForm.name}\nSĐT: ${orderForm.phone}\nĐịa chỉ: ${orderForm.address}\n\nTổng tiền: ${getTotalPrice().toLocaleString("vi-VN")}đ\n\nChúng tôi sẽ liên hệ với bạn sớm nhất!`,
     );
     clearCart();
-    setOrderForm({ name: "", phone: "", address: "", note: "" });
+    setOrderForm({ name: user?.name || "", phone: "", address: "", note: "" });
     setShowCheckout(false);
     setIsCartOpen(false);
   };
@@ -155,7 +184,7 @@ export function Cart() {
               </div>
 
               <div className="bg-gray-50 p-4 rounded-lg">
-                <h4 className="text-gray-700 mb-2">Tóm tắt đơn hàng</h4>
+                <h4 className="text-gray-700 mb-2">Hóa đơn của bạn</h4>
                 <div className="space-y-1 text-sm text-gray-600">
                   {cartItems.map((item) => (
                     <div key={item.id} className="flex justify-between">

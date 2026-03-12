@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { ShoppingCart, ArrowLeft, Search, Star } from "lucide-react";
+import {
+  ShoppingCart,
+  ArrowLeft,
+  Search,
+  Star,
+  Plus,
+  Trash2,
+  X,
+} from "lucide-react";
 import { useCart } from "../contexts/CartContext";
-
+import { useAuth } from "../contexts/AuthContext";
+import { useRating } from "../contexts/RatingContext";
+import dao from "../../assets/images/dao.jpg";
 import creamy_latte from "../../assets/images/creamy_latte.jpg";
 import cappucino from "../../assets/images/cappucino.jpg";
 import bac_xiu from "../../assets/images/bac_xiu.jpg";
@@ -42,7 +52,13 @@ interface MenuItem {
   rating: number;
 }
 
-const StarRating = ({ rating }: { rating: number }) => {
+const StarRating = ({
+  rating,
+  ratingCount,
+}: {
+  rating: number;
+  ratingCount?: number;
+}) => {
   const stars = [];
   const roundedRating = rating >= 4.5 ? 5 : Math.floor(rating);
 
@@ -55,7 +71,17 @@ const StarRating = ({ rating }: { rating: number }) => {
       stars.push(<Star key={i} className="w-4 h-4 text-gray-300" />);
     }
   }
-  return <div className="flex">{stars}</div>;
+
+  return (
+    <div className="flex items-center space-x-2">
+      <div className="flex">{stars}</div>
+      <span className="text-sm text-gray-600">
+        {rating > 0
+          ? `${rating} (${ratingCount || 0} đánh giá)`
+          : "Chưa có đánh giá"}
+      </span>
+    </div>
+  );
 };
 
 const menuItems: MenuItem[] = [
@@ -119,7 +145,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 7,
-    name: "Cà phê đen",
+    name: "Cà Phê Đen",
     description:
       "Cà phê đen Việt Nam nguyên chất được pha từ phin truyền thống",
     price: "25.000đ",
@@ -129,7 +155,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 8,
-    name: "Bánh su kem",
+    name: "Bánh Su Kem",
     description: "Bánh su kem Pháp tinh xảo với lớp vỏ giòn tan",
     price: "15.000đ",
     image: banh_xu_kem,
@@ -147,7 +173,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 10,
-    name: "Sinh tố bơ",
+    name: "Sinh Tố Bơ",
     description: "Sinh tố bơ tươi ngon được làm từ trái bơ chín mọng",
     price: "40.000đ",
     image: sinh_to_bo,
@@ -156,7 +182,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 11,
-    name: "Sinh tố dâu",
+    name: "Sinh Tố Dâu",
     description:
       "Sinh tố dâu tươi mát lạnh được làm từ những trái dâu chín mọng",
     price: "45.000đ",
@@ -194,7 +220,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 15,
-    name: "Nước ép cam",
+    name: "Nước Ép Cam",
     description: "Nước cam tươi ép 100% từ những trái cam chín mọng",
     price: "40.000đ",
     image: nuoc_ep_cam,
@@ -221,7 +247,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 18,
-    name: "Cà phê dừa",
+    name: "Cà Phê Dừa",
     description: "Cà phê dừa Việt Nam độc đáo với cốt dừa tươi tự nhiên",
     price: "40.000đ",
     image: ca_phe_dua,
@@ -230,7 +256,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 19,
-    name: "Cà phê muối",
+    name: "Cà Phê Muối",
     description: "Cà phê muối Đà Nẵng truyền thống với vị mặn nhẹ đặc trưng",
     price: "40.000đ",
     image: ca_phe_muoi,
@@ -239,7 +265,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 20,
-    name: "Cà phê sữa đá",
+    name: "Cà Phê Sữa Đá",
     description: "Cà phê sữa đá Sài Gòn với sữa đặc ngọt ngào",
     price: "40.000đ",
     image: ca_phe_sua_da,
@@ -248,7 +274,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 21,
-    name: "Cà phê trứng",
+    name: "Cà Phê Trứng",
     description: "Cà phê trứng Hà Nội truyền thống với lòng đỏ trứng gà tươi",
     price: "50.000đ",
     image: ca_phe_trung,
@@ -257,7 +283,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 22,
-    name: "Trà chanh",
+    name: "Trà Chanh",
     description: "Trà chanh thanh mát được làm từ chanh tươi nguyên chất",
     price: "20.000đ",
     image: tra_chanh,
@@ -266,7 +292,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 23,
-    name: "Trà chanh dây",
+    name: "Trà Chanh Dây",
     description: "Trà chanh dây tươi mát với vị ngọt dịu của chanh dây",
     price: "35.000đ",
     image: tra_chanh_day,
@@ -275,7 +301,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 24,
-    name: "Trà đào",
+    name: "Trà Đào",
     description: "Trà đào thơm lừng với những miếng đào ngọt ngào",
     price: "25.000đ",
     image: tra_dao,
@@ -284,7 +310,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 25,
-    name: "Trà vải",
+    name: "Trà Vải",
     description: "Trà vải tươi ngọt được làm từ những trái vải chín mọng",
     price: "30.000đ",
     image: tra_vai,
@@ -293,7 +319,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 26,
-    name: "Trà hoa nhài",
+    name: "Trà Hoa Nhài",
     description: "Trà hoa nhài thanh tao với hương thơm hoa nhài tinh tế",
     price: "30.000đ",
     image: tra_hoa_nhai,
@@ -302,7 +328,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 27,
-    name: "Trà ô long",
+    name: "Trà Ô Long",
     description: "Trà ô long Quảng Đông trứ danh với hương thơm nồng nàn",
     price: "30.000đ",
     image: tra_o_long,
@@ -311,7 +337,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 28,
-    name: "Nước ép chuối",
+    name: "Nước Ép Chuối",
     description: "Nước ép chuối tươi mát với vị ngọt thanh và béo ngậy",
     price: "30.000đ",
     image: nuoc_ep_chuoi,
@@ -320,7 +346,7 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 29,
-    name: "Nước ép dứa",
+    name: "Nước Ép Dứa",
     description: "Nước ép dứa tươi mát với vị ngọt thanh và chua nhẹ",
     price: "40.000đ",
     image: nuoc_ep_dua,
@@ -329,26 +355,69 @@ const menuItems: MenuItem[] = [
   },
   {
     id: 30,
-    name: "Nước ép dưa hấu",
+    name: "Nước Ép Dưa Hấu",
     description: "Nước ép dưa hấu tươi mát giải khát với vị ngọt thanh",
     price: "40.000đ",
     image: nuoc_ep_dua_hau,
     category: "Nước ép",
     rating: 4.1,
   },
+  {
+    id: 31,
+    name: "1 Rổ Đào 45KG",
+    description:
+      "Nước ép đào tươi với vị ngọt  mát như nước suối trong nguồn chảy ra",
+    price: "500.000đ",
+    image: dao,
+    category: "Đặc biệt",
+    rating: 5,
+  },
 ];
 
 export function MenuPage() {
   const { addToCart, setIsCartOpen, getTotalItems } = useCart();
+  const { isAdmin } = useAuth();
+  const { getProductAverageRating, getProductRatingCount } = useRating();
   const [selectedCategory, setSelectedCategory] = useState<string>("Tất cả");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<{
+    id: number;
+    name: string;
+  } | null>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    category: "Cà phê",
+    image: "",
+    file: null as File | null,
+  });
+
+  const getMenuItemsWithRatings = () => {
+    // Lấy sản phẩm tùy chỉnh từ localStorage
+    const customProducts = JSON.parse(
+      localStorage.getItem("customProducts") || "[]",
+    );
+
+    // Kết hợp sản phẩm mặc định và sản phẩm tùy chỉnh
+    const allItems = [...menuItems, ...customProducts];
+
+    return allItems.map((item) => ({
+      ...item,
+      rating: getProductAverageRating(item.id) || item.rating,
+      ratingCount: getProductRatingCount(item.id),
+    }));
+  };
+
+  const menuItemsWithRatings = getMenuItemsWithRatings();
 
   const categories = [
     "Tất cả",
-    ...Array.from(new Set(menuItems.map((item) => item.category))),
+    ...Array.from(new Set(menuItemsWithRatings.map((item) => item.category))),
   ];
 
-  const filteredItems = menuItems.filter((item) => {
+  const filteredItems = menuItemsWithRatings.filter((item) => {
     const matchesCategory =
       selectedCategory === "Tất cả" || item.category === selectedCategory;
     const matchesSearch =
@@ -373,6 +442,82 @@ export function MenuPage() {
         button.innerHTML = originalText;
       }, 1000);
     }
+  };
+
+  const handleDeleteProduct = (id: number, name: string) => {
+    setShowDeleteConfirm({ id, name });
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const imageUrl = event.target?.result as string;
+        setFormData({ ...formData, image: imageUrl, file });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleConfirmDelete = () => {
+    if (showDeleteConfirm) {
+      // Xóa từ localStorage nếu là sản phẩm tùy chỉnh
+      const customProducts = JSON.parse(
+        localStorage.getItem("customProducts") || "[]",
+      );
+      const updatedCustomProducts = customProducts.filter(
+        (item: MenuItem) => item.id !== showDeleteConfirm.id,
+      );
+      localStorage.setItem(
+        "customProducts",
+        JSON.stringify(updatedCustomProducts),
+      );
+
+      setShowDeleteConfirm(null);
+
+      // Reload trang để cập nhật danh sách
+      window.location.reload();
+    }
+  };
+
+  const handleCancelDelete = () => {
+    setShowDeleteConfirm(null);
+  };
+
+  const handleSubmitProduct = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newItem: MenuItem = {
+      id: Date.now(),
+      name: formData.name,
+      description: formData.description,
+      price: formData.price,
+      category: formData.category,
+      image: formData.image || "/api/placeholder/300/200",
+      rating: 5,
+    };
+
+    // Lưu vào localStorage
+    const existingProducts = JSON.parse(
+      localStorage.getItem("customProducts") || "[]",
+    );
+    existingProducts.push(newItem);
+    localStorage.setItem("customProducts", JSON.stringify(existingProducts));
+
+    // Reset form và đóng modal
+    setFormData({
+      name: "",
+      description: "",
+      price: "",
+      category: "Cà phê",
+      image: "",
+      file: null,
+    });
+    setShowAddForm(false);
+
+    // Reload trang để hiển thị sản phẩm mới
+    window.location.reload();
   };
 
   return (
@@ -429,10 +574,10 @@ export function MenuPage() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full transition-colors ${
+                className={`px-4 py-2 rounded-full transition-colors duration-300 ${
                   selectedCategory === category
                     ? "bg-green-600 text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-300"
                 }`}
               >
                 {category}
@@ -444,12 +589,21 @@ export function MenuPage() {
 
       {/* Products Grid */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-6">
+        <div className="mb-6 flex items-center justify-between">
           <p className="text-gray-600">
             Hiển thị{" "}
             <span className="font-semibold">{filteredItems.length}</span> sản
             phẩm
           </p>
+          {isAdmin() && (
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-[3px] transition-colors"
+            >
+              <Plus size={20} />
+              <span className="hidden sm:inline">Thêm sản phẩm</span>
+            </button>
+          )}
         </div>
 
         {filteredItems.length === 0 ? (
@@ -461,9 +615,9 @@ export function MenuPage() {
             {filteredItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-gray-100 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 py-3"
+                className="bg-gray-100 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 py-3 h-full flex flex-col"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="relative h-48 overflow-hidden flex-shrink-0">
                   <img
                     src={
                       item.image.startsWith("http") ? item.image : item.image
@@ -479,21 +633,33 @@ export function MenuPage() {
                       </span>
                     </div>
                   )}
-                  <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm">
+                  {isAdmin() && (
+                    <button
+                      onClick={() => handleDeleteProduct(item.id, item.name)}
+                      className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"
+                      title="Xóa sản phẩm"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  )}
+                  <div className="absolute bottom-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm">
                     {item.category}
                   </div>
                 </div>
-                <div className="p-5">
+                <div className="p-5 flex flex-col flex-grow">
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-lg text-gray-800">{item.name}</h3>
                     <span className="text-green-600 whitespace-nowrap ml-2 text-lg">
                       {item.price}
                     </span>
                   </div>
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-2 flex-grow product-description">
                     {item.description}
                   </p>
-                  <StarRating rating={item.rating} />
+                  <StarRating
+                    rating={item.rating}
+                    ratingCount={item.ratingCount}
+                  />
                   <button
                     id={`add-btn-${item.id}`}
                     onClick={() => handleAddToCart(item)}
@@ -521,6 +687,177 @@ export function MenuPage() {
           </span>
         )}
       </button>
+
+      {/* Add Product Modal */}
+      {showAddForm && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-[9999]">
+          <div className="bg-gray-900 bg-opacity-95 rounded-lg max-w-md w-full p-6 shadow-2xl border border-gray-700">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-white">
+                Thêm sản phẩm mới
+              </h3>
+              <button
+                onClick={() => setShowAddForm(false)}
+                className="p-2 hover:bg-gray-700 rounded-full transition-colors"
+              >
+                <X size={20} className="text-white" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmitProduct} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Tên sản phẩm
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  placeholder="Nhập tên sản phẩm"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Mô tả
+                </label>
+                <textarea
+                  required
+                  value={formData.description}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  rows={3}
+                  placeholder="Nhập mô tả sản phẩm"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Giá
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={formData.price}
+                  onChange={(e) =>
+                    setFormData({ ...formData, price: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  placeholder="50.000đ"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Danh mục
+                </label>
+                <select
+                  value={formData.category}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                >
+                  <option value="Cà phê">Cà phê</option>
+                  <option value="Trà">Trà</option>
+                  <option value="Sinh tố">Sinh tố</option>
+                  <option value="Nước ép">Nước ép</option>
+                  <option value="Bánh ngọt">Bánh ngọt</option>
+                  <option value="Đặc biệt">Đặc biệt</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">
+                  Hình ảnh
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="w-full px-3 py-2 border border-gray-600 bg-gray-800 text-white rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                />
+                {formData.image && (
+                  <div className="mt-2">
+                    <img
+                      src={formData.image}
+                      alt="Preview"
+                      className="h-32 w-full object-cover rounded-lg"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="flex space-x-3">
+                <button
+                  type="submit"
+                  className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+                >
+                  Thêm sản phẩm
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowAddForm(false);
+                    setFormData({
+                      name: "",
+                      description: "",
+                      price: "",
+                      category: "Cà phê",
+                      image: "",
+                      file: null,
+                    });
+                  }}
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400"
+                >
+                  Hủy
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-[9999]">
+          <div className="bg-gray-900 bg-opacity-95 rounded-lg max-w-sm w-full p-6 shadow-2xl border border-gray-700">
+            <div className="text-center">
+              <div className="mb-4">
+                <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                  <Trash2 size={24} className="text-red-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">
+                  Xác nhận xóa sản phẩm
+                </h3>
+                <p className="text-gray-300 mb-4">
+                  Bạn có chắc muốn xóa sản phẩm{" "}
+                  <strong>"{showDeleteConfirm.name}"</strong> không?
+                </p>
+              </div>
+              <div className="flex space-x-3">
+                <button
+                  onClick={handleCancelDelete}
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors"
+                >
+                  Hủy
+                </button>
+                <button
+                  onClick={handleConfirmDelete}
+                  className="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
+                >
+                  Xóa
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
