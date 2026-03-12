@@ -84,5 +84,14 @@
     "overrides": {
       "vite": "6.3.5"
     }
-  }
+  },
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/index.html"
+    }
+  ]
 }
