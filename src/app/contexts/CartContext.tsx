@@ -1,4 +1,11 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { useAuth } from "./AuthContext";
 
 export interface CartItem {
   id: number;
@@ -23,8 +30,30 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  // Load cart items for current user when user changes
+  useEffect(() => {
+    if (user) {
+      const savedCart = localStorage.getItem(`cart_${user.id}`);
+      if (savedCart) {
+        setCartItems(JSON.parse(savedCart));
+      } else {
+        setCartItems([]);
+      }
+    } else {
+      setCartItems([]);
+    }
+  }, [user]);
+
+  // Save cart items to localStorage whenever they change
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem(`cart_${user.id}`, JSON.stringify(cartItems));
+    }
+  }, [cartItems, user]);
 
   const addToCart = (item: Omit<CartItem, "quantity">) => {
     setCartItems((prevItems) => {
@@ -54,6 +83,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = () => {
     setCartItems([]);
+    if (user) {
+      localStorage.removeItem(`cart_${user.id}`);
+    }
   };
 
   const getTotalItems = () => {

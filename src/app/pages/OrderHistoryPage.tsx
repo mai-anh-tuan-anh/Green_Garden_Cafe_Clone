@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { ArrowLeft, Receipt, Calendar, Star } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { useRating } from "../contexts/RatingContext";
+import { useDarkMode } from "../contexts/DarkModeContext";
 
 interface OrderItem {
   id: number;
@@ -38,6 +39,7 @@ interface ProductRating {
 export function OrderHistoryPage() {
   const { user, isAuthenticated } = useAuth();
   const { addRating, getUserRatingForProduct } = useRating();
+  const { isDarkMode } = useDarkMode();
   const [orders, setOrders] = useState<Order[]>([]);
   const [showRatingForm, setShowRatingForm] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<{
@@ -321,9 +323,11 @@ export function OrderHistoryPage() {
           </div>
         )}
 
-        <div className="mt-8 bg-blue-50 rounded-lg p-6">
+        <div
+          className={`mt-8 ${isDarkMode ? "bg-gray-100" : "bg-white"} rounded-lg p-6`}
+        >
           <div className="flex items-start space-x-3">
-            <Calendar className="w-5 h-5 text-blue-600 mt-0.5" />
+            <Calendar className="w-5 h-5 text-blue-300 mt-0.5" />
             <div>
               <h4 className="font-medium text-blue-900 mb-1">Lưu ý</h4>
               <p className="text-blue-700 text-sm">

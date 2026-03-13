@@ -34,7 +34,7 @@ export function Hero() {
         </p>
         <Link
           to="/menu"
-          className="inline-block bg-green-600 hover:bg-white  text-white px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 shadow-lg border-2 border-green-600 cursor-pointer"
+          className="inline-block bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-lg border-2 border-green-600 cursor-pointer"
         >
           Xem Toàn Bộ Menu
         </Link>
@@ -43,7 +43,7 @@ export function Hero() {
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2" />
+          <div className="w-1 h-3 bg-white rounded-full mt-2 !bg-white" />
         </div>
       </div>
     </section>

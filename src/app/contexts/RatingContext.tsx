@@ -50,7 +50,8 @@ const getSpecialProductCounts = () => {
 
 // Số lượng đánh giá ban đầu cố định cho từng sản phẩm (ID 1-31)
 const INITIAL_RATING_COUNTS: Record<number, number> = {
-  ...getSpecialProductCounts(), // ID 1, 2 - ngẫu nhiên 300-500
+  1: 150,
+  2: 399,
   3: 429,
   4: 398,
   5: 456,

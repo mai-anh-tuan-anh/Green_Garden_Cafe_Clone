@@ -14,7 +14,7 @@
  */
 export default {
   plugins: {
-    tailwindcss: {
+    "@tailwindcss/postcss": {
       darkMode: "class",
     },
   },

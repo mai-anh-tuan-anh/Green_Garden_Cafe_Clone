@@ -1,5 +1,9 @@
 import interior from "../../assets/images/interior.png";
+import { useDarkMode } from "../contexts/DarkModeContext";
+
 export function About() {
+  const { isDarkMode } = useDarkMode();
+
   return (
     <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,23 +41,29 @@ export function About() {
               làm hài lòng cả những vị khách khó tính nhất.
             </p>
             <div className="mt-8 grid grid-cols-3 gap-4 text-center">
-              <div className="bg-green-100 p-4 rounded-lg">
+              <div
+                className={`${isDarkMode ? "bg-gray-100" : "bg-green-100"} p-4 rounded-lg`}
+              >
                 <div className="text-3xl text-green-700 mb-2 font-semibold">
                   5+
                 </div>
-                <div className="text-gray-600">Năm kinh nghiệm</div>
+                <div className="text-gray-500">Năm kinh nghiệm</div>
               </div>
-              <div className="bg-green-100 p-4 rounded-lg">
+              <div
+                className={`${isDarkMode ? "bg-gray-100" : "bg-green-100"} p-4 rounded-lg`}
+              >
                 <div className="text-3xl text-green-700 mb-2 font-semibold">
                   50+
                 </div>
-                <div className="text-gray-600">Loại đồ uống</div>
+                <div className="text-gray-500">Loại đồ uống</div>
               </div>
-              <div className="bg-green-100 p-4 rounded-lg">
+              <div
+                className={`${isDarkMode ? "bg-gray-100" : "bg-green-100"} p-4 rounded-lg`}
+              >
                 <div className="text-3xl text-green-700 mb-2 font-semibold">
                   1000+
                 </div>
-                <div className="text-gray-600">Khách hàng</div>
+                <div className="text-gray-500">Khách hàng</div>
               </div>
             </div>
           </div>

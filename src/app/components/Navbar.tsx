@@ -18,6 +18,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [showOrderHistoryText, setShowOrderHistoryText] = useState(false);
   const { getTotalItems, setIsCartOpen } = useCart();
   const { user, logout, isAuthenticated } = useAuth();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
@@ -276,14 +277,22 @@ export function Navbar() {
                     <Link
                       to="/order-history"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-700 hover:bg-gray-50 transition-colors rounded-md"
+                      className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:text-green-700 hover:bg-gray-50 hover:underline transition-colors rounded-md"
                     >
-                      <Receipt size={16} />
-                      <span>Lịch sử hóa đơn</span>
+                      <Receipt
+                        size={16}
+                        onMouseEnter={() => setShowOrderHistoryText(true)}
+                        onMouseLeave={() => setShowOrderHistoryText(false)}
+                      />
+                      <span
+                        className={showOrderHistoryText ? "inline" : "hidden"}
+                      >
+                        Lịch sử hóa đơn
+                      </span>
                     </Link>
                     <button
                       onClick={() => setShowLogoutConfirm(true)}
-                      className="flex items-center space-x-2 px-4 py-2 text-red-600 hover:text-red-700 hover:bg-gray-50 transition-colors rounded-md"
+                      className="flex items-center space-x-2 px-4 py-2 text-red-600 hover:text-white hover:!bg-red-600 transition-colors rounded-md"
                     >
                       <LogOut size={16} />
                       <span>Đăng xuất</span>
@@ -298,7 +307,7 @@ export function Navbar() {
 
       {/* Logout Confirmation Modal */}
       {showLogoutConfirm && (
-        <div className="fixed mt-100 inset-0 flex items-center justify-center p-4 z-[9999]">
+        <div className="fixed inset-0 flex items-center justify-center p-4 z-[9999]">
           <div className="bg-gray-900 bg-opacity-95 rounded-lg max-w-sm w-full p-6 shadow-2xl border border-gray-700">
             <div className="text-center">
               <div className="mb-4">
