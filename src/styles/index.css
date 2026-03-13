@@ -116,6 +116,7 @@ body {
 
 .text-green-600 {
   color: #16a34a !important;
+  font-weight: 500; /* Font-weight đậm hơn cho light mode giống dark mode */
 }
 
 .hover\:text-green-700:hover {
