@@ -8,9 +8,9 @@
     "npm": ">=8.0.0"
   },
   "scripts": {
-    "dev": "npx vite",
-    "build": "npx vite build",
-    "preview": "npx vite preview",
+    "dev": "node node_modules/vite/dist/node/cli.js",
+    "build": "node node_modules/vite/dist/node/cli.js build",
+    "preview": "node node_modules/vite/dist/node/cli.js preview",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
