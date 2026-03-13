@@ -190,8 +190,8 @@ export function OrderHistoryPage() {
                 key={order.id}
                 className="bg-white rounded-lg shadow overflow-hidden"
               >
-                <div className="bg-gradient-to-r from-green-50 to-green-100 px-6 py-4 border-b rounded-[3px]">
-                  <div className="flex items-center justify-between bg-gray-200 p-5">
+                <div className="bg-gray-300 from-green-50 to-green-100 px-6 py-4 border-b rounded-[3px]">
+                  <div className="flex items-center justify-between p-5">
                     <div className="flex items-center space-x-4">
                       <div>
                         <p className="text-sm text-gray-600">Mã hóa đơn</p>

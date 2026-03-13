@@ -47,7 +47,7 @@ export function About() {
                 <div className="text-3xl text-green-700 mb-2 font-semibold">
                   5+
                 </div>
-                <div className="text-gray-500">Năm kinh nghiệm</div>
+                <div className="text-gray-600">Năm kinh nghiệm</div>
               </div>
               <div
                 className={`${isDarkMode ? "bg-gray-100" : "bg-green-100"} p-4 rounded-lg`}
@@ -55,7 +55,7 @@ export function About() {
                 <div className="text-3xl text-green-700 mb-2 font-semibold">
                   50+
                 </div>
-                <div className="text-gray-500">Loại đồ uống</div>
+                <div className="text-gray-600">Loại đồ uống</div>
               </div>
               <div
                 className={`${isDarkMode ? "bg-gray-100" : "bg-green-100"} p-4 rounded-lg`}
@@ -63,7 +63,7 @@ export function About() {
                 <div className="text-3xl text-green-700 mb-2 font-semibold">
                   1000+
                 </div>
-                <div className="text-gray-500">Khách hàng</div>
+                <div className="text-gray-600">Khách hàng</div>
               </div>
             </div>
           </div>
