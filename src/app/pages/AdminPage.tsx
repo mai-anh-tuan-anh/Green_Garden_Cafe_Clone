@@ -234,7 +234,7 @@ export function AdminPage() {
               </h2>
               <button
                 onClick={() => setShowAddForm(true)}
-                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center"
+                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 flex items-center cursor-pointer"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Thêm sản phẩm
@@ -296,13 +296,13 @@ export function AdminPage() {
                       <div className="flex space-x-2">
                         <button
                           onClick={() => handleEdit(item)}
-                          className="text-blue-600 hover:text-blue-900"
+                          className="text-blue-600 hover:text-blue-900 cursor-pointer"
                         >
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button
                           onClick={() => handleDelete(item.id)}
-                          className="text-red-600 hover:text-red-900"
+                          className="text-red-600 hover:text-red-900 cursor-pointer"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>

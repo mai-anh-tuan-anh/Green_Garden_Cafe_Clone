@@ -636,7 +636,7 @@ export function MenuPage() {
                   {isAdmin() && (
                     <button
                       onClick={() => handleDeleteProduct(item.id, item.name)}
-                      className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"
+                      className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors cursor-pointer"
                       title="Xóa sản phẩm"
                     >
                       <Trash2 size={16} />
@@ -698,7 +698,7 @@ export function MenuPage() {
               </h3>
               <button
                 onClick={() => setShowAddForm(false)}
-                className="p-2 hover:bg-gray-700 rounded-full transition-colors"
+                className="p-2 hover:bg-gray-700 rounded-full transition-colors hover:scale-110 cursor-pointer"
               >
                 <X size={20} className="text-white" />
               </button>
@@ -797,7 +797,7 @@ export function MenuPage() {
               <div className="flex space-x-3">
                 <button
                   type="submit"
-                  className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+                  className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer"
                 >
                   Thêm sản phẩm
                 </button>
@@ -814,7 +814,7 @@ export function MenuPage() {
                       file: null,
                     });
                   }}
-                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400"
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 rounded-lg hover:bg-gray-400 hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer"
                 >
                   Hủy
                 </button>
@@ -832,24 +832,27 @@ export function MenuPage() {
                 <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
                   <Trash2 size={24} className="text-red-600" />
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2 hover:text-yellow-300 transition-colors cursor-pointer">
                   Xác nhận xóa sản phẩm
                 </h3>
-                <p className="text-gray-300 mb-4">
+                <p className="text-gray-300 mb-4 hover:text-gray-200 transition-colors">
                   Bạn có chắc muốn xóa sản phẩm{" "}
-                  <strong>"{showDeleteConfirm.name}"</strong> không?
+                  <strong className="hover:text-red-400 transition-colors">
+                    "{showDeleteConfirm.name}"
+                  </strong>{" "}
+                  không?
                 </p>
               </div>
               <div className="flex space-x-3">
                 <button
                   onClick={handleCancelDelete}
-                  className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors"
+                  className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer"
                 >
                   Hủy
                 </button>
                 <button
                   onClick={handleConfirmDelete}
-                  className="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition-colors"
+                  className="flex-1 bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer"
                 >
                   Xóa
                 </button>

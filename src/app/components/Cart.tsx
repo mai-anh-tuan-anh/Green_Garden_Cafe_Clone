@@ -92,21 +92,23 @@ export function Cart() {
 
       {/* Cart Drawer */}
       <div
-        className={`fixed right-0 top-0 h-full w-full sm:w-[450px] bg-white shadow-2xl z-[60] flex flex-col transition-all duration-500 ease-out ${
+        className={`fixed right-0 top-0 h-full w-full sm:w-[450px] bg-white dark:bg-gray-800 shadow-2xl z-[60] flex flex-col transition-all duration-500 ease-out ${
           isCartOpen
             ? "translate-x-0 opacity-100"
             : "translate-x-full opacity-0"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center space-x-2">
             <ShoppingBag className="text-green-600" size={24} />
-            <h2 className="text-2xl text-gray-800">Giỏ hàng</h2>
+            <h2 className="text-2xl text-gray-800 dark:text-gray-200">
+              Giỏ hàng
+            </h2>
           </div>
           <button
             onClick={() => setIsCartOpen(false)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors cursor-pointer"
           >
             <X size={24} />
           </button>
@@ -122,25 +124,27 @@ export function Cart() {
           ) : showCheckout ? (
             /* Checkout Form */
             <form onSubmit={handleSubmitOrder} className="space-y-4">
-              <h3 className="text-xl text-gray-800 mb-4">
+              <h3 className="text-xl text-gray-800 dark:text-gray-200 mb-4">
                 Thông tin giao hàng
               </h3>
 
               <div>
-                <label className="block text-gray-700 mb-2">Họ và tên *</label>
+                <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                  Họ và tên *
+                </label>
                 <input
                   type="text"
                   name="name"
                   required
                   value={orderForm.name}
                   onChange={handleOrderFormChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200"
                   placeholder="Nguyễn Văn A"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2">
+                <label className="block text-gray-700 dark:text-gray-300 mb-2">
                   Số điện thoại *
                 </label>
                 <input
@@ -151,13 +155,13 @@ export function Cart() {
                   pattern="[0-9]{10}"
                   value={orderForm.phone}
                   onChange={handleOrderFormChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200"
                   placeholder="0123 456 789"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2">
+                <label className="block text-gray-700 dark:text-gray-300 mb-2">
                   Địa chỉ giao hàng *
                 </label>
                 <textarea
@@ -165,27 +169,31 @@ export function Cart() {
                   required
                   value={orderForm.address}
                   onChange={handleOrderFormChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200 resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200 resize-none"
                   rows={3}
                   placeholder="Số nhà, tên đường, quận/huyện..."
                 />
               </div>
 
               <div>
-                <label className="block text-gray-700 mb-2">Ghi chú</label>
+                <label className="block text-gray-700 dark:text-gray-300 mb-2">
+                  Ghi chú
+                </label>
                 <textarea
                   name="note"
                   value={orderForm.note}
                   onChange={handleOrderFormChange}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200 resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-200 resize-none"
                   rows={2}
                   placeholder="Ghi chú đơn hàng (không bắt buộc)"
                 />
               </div>
 
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <h4 className="text-gray-700 mb-2">Hóa đơn của bạn</h4>
-                <div className="space-y-1 text-sm text-gray-600">
+              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                <h4 className="text-gray-700 dark:text-gray-300 mb-2">
+                  Hóa đơn của bạn
+                </h4>
+                <div className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
                   {cartItems.map((item) => (
                     <div key={item.id} className="flex justify-between">
                       <span>
@@ -201,7 +209,7 @@ export function Cart() {
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-gray-300 mt-2 pt-2 flex justify-between text-gray-800">
+                <div className="border-t border-gray-300 dark:border-gray-600 mt-2 pt-2 flex justify-between text-gray-800 dark:text-gray-200">
                   <span>Tổng cộng:</span>
                   <span className="text-lg">
                     {formatPrice(getTotalPrice())}đ
@@ -213,7 +221,7 @@ export function Cart() {
                 <button
                   type="button"
                   onClick={() => setShowCheckout(false)}
-                  className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg transition-colors cursor-pointer"
+                  className="flex-1 bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-200 py-3 rounded-lg transition-colors cursor-pointer"
                 >
                   Quay lại
                 </button>
@@ -231,7 +239,7 @@ export function Cart() {
               {cartItems.map((item) => (
                 <div
                   key={item.id}
-                  className="flex space-x-4 bg-gray-50 p-4 rounded-lg"
+                  className="flex space-x-4 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg"
                 >
                   <img
                     src={item.image}
@@ -239,25 +247,27 @@ export function Cart() {
                     className="w-20 h-20 object-cover rounded-lg"
                   />
                   <div className="flex-1">
-                    <h3 className="text-gray-800 mb-1">{item.name}</h3>
+                    <h3 className="text-gray-800 dark:text-gray-200 mb-1">
+                      {item.name}
+                    </h3>
                     <p className="text-green-600 mb-2">{item.price}</p>
                     <div className="flex items-center space-x-2">
                       <button
                         onClick={() =>
                           updateQuantity(item.id, item.quantity - 1)
                         }
-                        className="p-1 hover:bg-gray-200 rounded transition-colors cursor-pointer"
+                        className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors cursor-pointer"
                       >
                         <Minus size={16} />
                       </button>
-                      <span className="w-8 text-center text-gray-800">
+                      <span className="w-8 text-center text-gray-800 dark:text-gray-200">
                         {item.quantity}
                       </span>
                       <button
                         onClick={() =>
                           updateQuantity(item.id, item.quantity + 1)
                         }
-                        className="p-1 hover:bg-gray-200 rounded transition-colors cursor-pointer"
+                        className="p-1 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors cursor-pointer"
                       >
                         <Plus size={16} />
                       </button>
@@ -265,7 +275,7 @@ export function Cart() {
                   </div>
                   <button
                     onClick={() => removeFromCart(item.id)}
-                    className="p-2 hover:bg-red-100 rounded-full transition-colors h-fit cursor-pointer"
+                    className="p-2 hover:bg-red-100 dark:hover:bg-red-900 rounded-full transition-colors h-fit cursor-pointer"
                   >
                     <Trash2 size={18} className="text-red-600" />
                   </button>
@@ -277,9 +287,11 @@ export function Cart() {
 
         {/* Footer */}
         {cartItems.length > 0 && !showCheckout && (
-          <div className="border-t border-gray-200 p-6 space-y-4">
+          <div className="border-t border-gray-200 dark:border-gray-700 p-6 space-y-4">
             <div className="flex justify-between items-center text-xl">
-              <span className="text-gray-800">Tổng cộng:</span>
+              <span className="text-gray-800 dark:text-gray-200">
+                Tổng cộng:
+              </span>
               <span className="text-green-600">
                 {formatPrice(getTotalPrice())}đ
               </span>
@@ -292,7 +304,7 @@ export function Cart() {
             </button>
             <button
               onClick={clearCart}
-              className="w-full bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-lg transition-colors cursor-pointer"
+              className="w-full bg-gray-200 hover:bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-200 py-3 rounded-lg transition-colors cursor-pointer"
             >
               Xóa giỏ hàng
             </button>

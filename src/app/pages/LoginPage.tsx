@@ -169,7 +169,7 @@ export function LoginPage() {
             {isLogin ? "Chưa có tài khoản?" : "Đã có tài khoản?"}{" "}
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-green-600 hover:text-green-700 font-medium"
+              className="text-green-600 hover:text-green-700 font-medium cursor-pointer"
             >
               {isLogin ? "Đăng ký ngay" : "Đăng nhập"}
             </button>

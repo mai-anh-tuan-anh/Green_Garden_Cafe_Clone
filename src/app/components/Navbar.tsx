@@ -159,7 +159,7 @@ export function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors"
+                className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700 transition-colors cursor-pointer"
               >
                 <User size={16} />
                 <span>Đăng nhập</span>
@@ -195,7 +195,7 @@ export function Navbar() {
             ) : (
               <Link
                 to="/login"
-                className="p-2 text-gray-700 hover:text-green-700 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-2 text-gray-700 hover:text-green-700 hover:bg-gray-100 rounded-full transition-colors cursor-pointer"
                 title="Đăng nhập"
               >
                 <User size={18} />
