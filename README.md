@@ -170,8 +170,10 @@ npm run dev
 
 ### Website Screenshots
 
-- **Home Page**
-  ![home](image-6.png)
+- **Home/Login**
+  ![home](image-11.png)
+  ![Login](image-12.png)
+  ![LoginPage](image-13.png)
 - **About Section**
   ![about](image-1.png)
 - **Menu Page**
@@ -189,6 +191,9 @@ npm run dev
 - **Shopping Cart**
   ![cart](image-8.png)
   ![cart1](image-9.png)
+- **Bill**
+  ![alt text](image-14.png)
+  ![alt text](image-15.png)
 
 ### UI Features
 
